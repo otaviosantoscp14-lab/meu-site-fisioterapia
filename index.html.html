@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. João Otávio | Fisioterapia Especializada</title>
+
+<!-- Google Fonts — closest web-available to Utile Display + Brother 1816 -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── BRAND TOKENS ─────────────────────────────────── */
+:root {
+  --azul-vital:       #22497D;
+  --azul-medio:       #1a3a65;
+  --azul-escuro:      #0f2240;
+  --verde-equilibrio: #93CFBA;
+  --verde-cura:       #055F5A;
+  --nevoa:            #E7E8EA;
+  --cinza-neutro:     #C6C6C6;
+  --azul-tranquilo:   #88BDCF;
+  --branco:           #FFFFFF;
+  --texto-escuro:     #1a1a2e;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif; /* Utile Display stand-in */
+  --font-body:    'Jost', sans-serif;                    /* Brother 1816 stand-in */
+}
+
+/* ── RESET ────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--branco);
+  color: var(--texto-escuro);
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 6%;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(34,73,125,0.1);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(34,73,125,0.1); }
+
+.nav-logo { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+.nav-logo-icon {
+  width: 38px; height: 38px;
+  border: 2px solid var(--azul-vital); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+/* JO monogram via CSS */
+.nav-logo-icon::before {
+  content: 'JO';
+  font-family: var(--font-display); font-size: 0.75rem; font-weight: 600;
+  color: var(--azul-vital); letter-spacing: -0.04em;
+}
+.nav-logo-text { line-height: 1.2; }
+.nav-logo-name {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+  color: var(--azul-vital); letter-spacing: 0.08em; display: block;
+}
+.nav-logo-sub {
+  font-size: 0.6rem; font-weight: 400; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--cinza-neutro); display: block;
+}
+
+.nav-links { display: flex; gap: 2.4rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--azul-medio); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--verde-cura); }
+.nav-cta {
+  background: var(--azul-vital) !important;
+  color: var(--branco) !important;
+  padding: 0.6rem 1.5rem; border-radius: 2px;
+}
+.nav-cta:hover { background: var(--verde-cura) !important; }
+
+/* ── HERO ─────────────────────────────────────────── */
+#home {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 55% 45%;
+  background: var(--nevoa);
+  position: relative; overflow: hidden;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 6% 5rem 8%;
+  position: relative; z-index: 2;
+}
+
+/* subtle geometric decoration */
+.hero-left::before {
+  content: '';
+  position: absolute; top: 12%; left: 4%;
+  width: 320px; height: 320px; border-radius: 50%;
+  border: 1px solid rgba(34,73,125,0.08);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.hero-eyebrow-line { width: 32px; height: 1px; background: var(--verde-cura); }
+.hero-eyebrow span {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--verde-cura);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 600; line-height: 1.08; letter-spacing: -0.01em;
+  color: var(--azul-vital); margin-bottom: 0.4rem;
+}
+h1 em { font-style: italic; color: var(--verde-cura); }
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  font-weight: 300; color: var(--azul-medio);
+  margin-bottom: 2rem; line-height: 1.3;
+}
+
+.hero-divider {
+  width: 56px; height: 2px;
+  background: linear-gradient(90deg, var(--azul-vital), var(--verde-equilibrio));
+  margin-bottom: 2rem;
+}
+
+.hero-desc {
+  font-size: 0.97rem; line-height: 1.8; font-weight: 300;
+  color: #4a5568; max-width: 440px; margin-bottom: 2.8rem;
+}
+
+.hero-btns { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--azul-vital); color: var(--branco);
+  padding: 0.95rem 2.2rem; font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none; border-radius: 2px;
+  transition: background 0.25s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--verde-cura); transform: translateY(-2px); }
+.btn-secondary {
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--azul-vital);
+  text-decoration: none; border-bottom: 1px solid var(--azul-vital);
+  padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+}
+.btn-secondary:hover { color: var(--verde-cura); border-color: var(--verde-cura); }
+
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(34,73,125,0.12);
+}
+.stat-num {
+  font-family: var(--font-display); font-size: 2.2rem; font-weight: 600;
+  color: var(--azul-vital); line-height: 1;
+}
+.stat-label {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--cinza-neutro); margin-top: 0.3rem;
+}
+
+/* Hero right — photo panel */
+.hero-right {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--azul-vital) 0%, var(--verde-cura) 100%);
+}
+.hero-photo {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  mix-blend-mode: luminosity; opacity: 0.55;
+  display: block;
+}
+.hero-photo-real {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+.hero-right-content {
+  position: absolute; bottom: 3rem; left: 2rem; right: 2rem;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 4px;
+  padding: 0.9rem 1.4rem;
+}
+.badge-stars { color: #f5c542; font-size: 0.85rem; letter-spacing: 2px; }
+.badge-info .rating {
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
+  color: var(--branco); line-height: 1;
+}
+.badge-info .source { font-size: 0.68rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; }
+
+/* placeholder for photo */
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, var(--azul-vital) 0%, var(--verde-cura) 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5); font-size: 0.85rem; text-align: center;
+  padding: 3rem; gap: 1rem;
+}
+.placeholder-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 2px dashed rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
+}
+
+/* ── SECTIONS COMMON ──────────────────────────────── */
+section { padding: 7rem 8%; }
+
+.section-header { margin-bottom: 4rem; }
+.eyebrow {
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem;
+}
+.eyebrow-line { width: 28px; height: 1px; background: var(--verde-cura); }
+.eyebrow span {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--verde-cura);
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+  font-weight: 600; color: var(--azul-vital); line-height: 1.1;
+}
+h2 em { font-style: italic; color: var(--verde-cura); }
+.section-divider {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, var(--azul-vital), var(--verde-equilibrio));
+  margin-top: 1.2rem;
+}
+
+/* ── SOBRE ────────────────────────────────────────── */
+#sobre { background: var(--branco); }
+.sobre-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: 7rem; align-items: center;
+}
+.sobre-img-wrap { position: relative; }
+.sobre-img-box {
+  width: 100%; aspect-ratio: 3/4;
+  background: linear-gradient(160deg, var(--azul-vital) 0%, var(--verde-cura) 100%);
+  border-radius: 4px; overflow: hidden; position: relative;
+}
+.sobre-img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.sobre-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6); font-size: 0.85rem; text-align: center; gap: 0.8rem;
+}
+.sobre-badge {
+  position: absolute; bottom: -1.5rem; right: -2rem;
+  background: var(--verde-cura); color: var(--branco);
+  padding: 1.4rem 2rem; border-radius: 4px; text-align: center;
+}
+.sobre-badge strong {
+  font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; display: block;
+}
+.sobre-badge span { font-size: 0.72rem; letter-spacing: 0.08em; opacity: 0.85; }
+
+.sobre-text { padding-bottom: 2rem; }
+.sobre-text p {
+  font-size: 0.98rem; line-height: 1.85; font-weight: 300;
+  color: #4a5568; margin-bottom: 1.4rem;
+}
+.sobre-atributos {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin: 2.5rem 0;
+}
+.atributo {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+}
+.atributo-dot {
+  width: 6px; height: 6px; min-width: 6px; border-radius: 50%;
+  background: var(--verde-cura); margin-top: 0.4rem;
+}
+.atributo span { font-size: 0.85rem; font-weight: 500; color: var(--azul-medio); }
+
+.formacoes { margin-top: 2rem; border-top: 1px solid var(--nevoa); padding-top: 2rem; }
+.formacao-row {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 0.9rem 0; border-bottom: 1px solid var(--nevoa);
+}
+.formacao-icon {
+  width: 34px; height: 34px; min-width: 34px;
+  background: rgba(34,73,125,0.07); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+}
+.formacao-titulo { font-weight: 600; font-size: 0.88rem; color: var(--azul-vital); }
+.formacao-inst { font-size: 0.77rem; color: var(--cinza-neutro); margin-top: 0.15rem; }
+
+/* ── SERVIÇOS ─────────────────────────────────────── */
+#servicos { background: var(--nevoa); }
+.servicos-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: end; margin-bottom: 4rem;
+}
+.servicos-intro-text p {
+  font-size: 0.97rem; line-height: 1.8; color: #4a5568; font-weight: 300;
+}
+.servicos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+  border: 1.5px solid rgba(34,73,125,0.12);
+}
+.servico-card {
+  background: var(--branco); padding: 2.5rem 2rem;
+  border-right: 1.5px solid rgba(34,73,125,0.12);
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.servico-card:last-child { border-right: none; }
+.servico-card:hover { background: var(--azul-vital); }
+.servico-card:hover .servico-num,
+.servico-card:hover .servico-title,
+.servico-card:hover .servico-desc { color: var(--branco); }
+.servico-card:hover .tag-tecnica {
+  background: rgba(255,255,255,0.12); color: var(--verde-equilibrio);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.servico-num {
+  font-family: var(--font-display); font-size: 3rem; font-weight: 300;
+  color: rgba(34,73,125,0.12); line-height: 1; margin-bottom: 1.5rem;
+  transition: color 0.3s;
+}
+.servico-title {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+  color: var(--azul-vital); margin-bottom: 1rem; line-height: 1.2;
+  transition: color 0.3s;
+}
+.servico-desc {
+  font-size: 0.88rem; line-height: 1.75; color: #6b7280; margin-bottom: 1.5rem;
+  transition: color 0.3s;
+}
+.servico-tecnicas { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag-tecnica {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+  padding: 0.3rem 0.8rem; border-radius: 1px;
+  background: rgba(34,73,125,0.07); color: var(--azul-vital);
+  border: 1px solid rgba(34,73,125,0.15);
+  transition: all 0.3s;
+}
+
+/* ── DEPOIMENTOS ──────────────────────────────────── */
+#depoimentos { background: var(--azul-vital); }
+#depoimentos .eyebrow span { color: var(--verde-equilibrio); }
+#depoimentos .eyebrow-line { background: var(--verde-equilibrio); }
+#depoimentos h2 { color: var(--branco); }
+#depoimentos .section-divider { background: linear-gradient(90deg, var(--verde-equilibrio), transparent); }
+
+.dep-top {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 4rem; flex-wrap: wrap; gap: 1.5rem;
+}
+.dep-google-badge {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.9rem 1.5rem; border-radius: 4px;
+}
+.g-letter {
+  font-size: 1.6rem; font-weight: 800;
+  background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.g-rating-num {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+  color: var(--branco); line-height: 1;
+}
+.g-stars-row { color: #f5c542; font-size: 0.8rem; letter-spacing: 1px; }
+.g-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+
+.dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+.dep-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 2.2rem; position: relative;
+}
+.dep-quote-mark {
+  font-family: var(--font-display); font-size: 4rem; font-weight: 300;
+  color: var(--verde-equilibrio); line-height: 0.8; margin-bottom: 1.2rem;
+}
+.dep-text {
+  font-size: 0.92rem; line-height: 1.8; color: rgba(255,255,255,0.8);
+  font-weight: 300; margin-bottom: 1.8rem;
+}
+.dep-author { display: flex; align-items: center; gap: 0.8rem; }
+.dep-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--verde-cura); display: flex; align-items: center;
+  justify-content: center; font-family: var(--font-display);
+  font-size: 1rem; font-weight: 600; color: var(--branco);
+}
+.dep-name { font-weight: 600; font-size: 0.88rem; color: var(--branco); }
+.dep-stars-small { color: #f5c542; font-size: 0.7rem; margin-top: 0.1rem; }
+
+/* ── CTA ──────────────────────────────────────────── */
+.cta-section {
+  background: var(--verde-cura); padding: 6rem 8%;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 3rem; align-items: center;
+}
+.cta-section h2 { color: var(--branco); }
+.cta-section p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-top: 0.8rem; font-weight: 300; }
+.btn-cta-white {
+  display: inline-block; background: var(--branco); color: var(--verde-cura);
+  padding: 1.1rem 2.8rem; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+  border-radius: 2px; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-cta-white:hover { background: var(--nevoa); transform: translateY(-2px); }
+
+/* ── CONTATO ──────────────────────────────────────── */
+#contato { background: var(--branco); }
+.contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; }
+
+.contato-info p {
+  font-size: 0.97rem; line-height: 1.8; color: #6b7280;
+  font-weight: 300; margin: 1.5rem 0 2.5rem;
+}
+.contato-dados { display: flex; flex-direction: column; gap: 1.4rem; }
+.dado-row { display: flex; gap: 1rem; align-items: center; }
+.dado-icon {
+  width: 42px; height: 42px; min-width: 42px;
+  background: rgba(34,73,125,0.07); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.dado-label {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--cinza-neutro);
+}
+.dado-value { font-size: 0.95rem; font-weight: 500; color: var(--azul-vital); margin-top: 0.15rem; }
+
+.locais { margin-top: 3rem; }
+.locais-title {
+  font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
+  color: var(--azul-vital); margin-bottom: 1.5rem;
+}
+.local-item {
+  padding: 1.3rem; border: 1px solid rgba(34,73,125,0.1);
+  border-radius: 2px; margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+.local-item:hover { border-color: var(--verde-cura); }
+.local-nome { font-weight: 600; font-size: 0.9rem; color: var(--azul-vital); }
+.local-end { font-size: 0.82rem; color: #6b7280; margin: 0.3rem 0; }
+.local-hrs { font-size: 0.78rem; color: var(--verde-cura); font-weight: 500; }
+
+/* Formulário */
+.contato-form-wrap {
+  background: var(--nevoa); padding: 3rem; border-radius: 4px;
+}
+.form-title {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 600;
+  color: var(--azul-vital); margin-bottom: 0.4rem;
+}
+.form-sub { font-size: 0.85rem; color: #6b7280; margin-bottom: 2.2rem; font-weight: 300; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label {
+  display: block; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--azul-medio); margin-bottom: 0.5rem;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; background: var(--branco);
+  border: 1px solid rgba(34,73,125,0.15);
+  padding: 0.85rem 1rem; color: var(--texto-escuro);
+  font-family: var(--font-body); font-size: 0.9rem;
+  border-radius: 2px; outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--azul-vital); }
+.form-group select { cursor: pointer; }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-group select option { background: var(--branco); }
+.form-submit {
+  width: 100%; padding: 1rem;
+  background: var(--azul-vital); color: var(--branco);
+  border: none; border-radius: 2px;
+  font-family: var(--font-body); font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.form-submit:hover { background: var(--verde-cura); transform: translateY(-1px); }
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  background: var(--azul-escuro); padding: 3rem 8%;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-brand { display: flex; flex-direction: column; gap: 0.3rem; }
+.footer-name {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  color: var(--branco); letter-spacing: 0.06em;
+}
+.footer-sub { font-size: 0.68rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--verde-equilibrio); }
+footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+
+/* ── ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow  { animation: fadeUp 0.7s 0.1s both; }
+.hero-left h1  { animation: fadeUp 0.7s 0.25s both; }
+.hero-tagline  { animation: fadeUp 0.7s 0.38s both; }
+.hero-divider  { animation: fadeUp 0.7s 0.48s both; }
+.hero-desc     { animation: fadeUp 0.7s 0.55s both; }
+.hero-btns     { animation: fadeUp 0.7s 0.65s both; }
+.hero-stats    { animation: fadeUp 0.7s 0.78s both; }
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 960px) {
+  #home { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 8rem 6% 5rem; }
+  .sobre-grid, .contato-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .sobre-badge { right: 0; bottom: -1rem; }
+  .servicos-grid { grid-template-columns: 1fr; }
+  .dep-grid { grid-template-columns: 1fr; }
+  .cta-section { grid-template-columns: 1fr; }
+  .servicos-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+  .nav-links { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .sobre-atributos { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon"></div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">DR. JOÃO OTÁVIO</span>
+      <span class="nav-logo-sub">Fisioterapia Especializada</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Início</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato" class="nav-cta">Agendar Avaliação</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Fisioterapia Ortopédica &amp; Esportiva</span>
+    </div>
+
+    <h1>Compromisso<br>real com a<br>sua <em>recuperação.</em></h1>
+    <p class="hero-tagline">Volte a se mover sem limitações.</p>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-desc">
+      Avaliação individualizada que vai além do sintoma — identificamos a causa real do problema 
+      e construímos um plano de tratamento com ciência, técnica e cuidado humano.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">Agendar Avaliação</a>
+      <a href="#servicos" class="btn-secondary">Ver serviços</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Google Reviews</div>
+      </div>
+      <div>
+        <div class="stat-num">+500</div>
+        <div class="stat-label">Pacientes atendidos</div>
+      </div>
+      <div>
+        <div class="stat-num">+6</div>
+        <div class="stat-label">Anos de experiência</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- Substitua pelo caminho da sua foto -->
+    <!-- <img src="sua-foto.jpg" class="hero-photo-real" alt="Dr. João Otávio"> -->
+    <div class="hero-photo-placeholder">
+      <div class="placeholder-circle">👨‍⚕️</div>
+      <p>Insira sua foto profissional aqui<br><small style="opacity:0.6">(a do brand kit da Cajuais funciona perfeitamente)</small></p>
+    </div>
+
+    <div class="hero-right-content">
+      <div class="hero-badge">
+        <div class="badge-stars">★★★★★</div>
+        <div class="badge-info">
+          <div class="rating">4.9</div>
+          <div class="source">GOOGLE REVIEWS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOBRE ── -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-img-wrap">
+      <div class="sobre-img-box">
+        <!-- <img src="foto-sobre.jpg" alt="Dr. João Otávio"> -->
+        <div class="sobre-img-placeholder">
+          <div style="font-size:3rem;">👤</div>
+          <p>Sua segunda foto<br><small style="opacity:0.6">ambiente clínico ou atendimento</small></p>
+        </div>
+      </div>
+      <div class="sobre-badge">
+        <strong>+6</strong>
+        <span>anos de experiência</span>
+      </div>
+    </div>
+
+    <div class="sobre-text">
+      <div class="section-header">
+        <div class="eyebrow">
+          <div class="eyebrow-line"></div>
+          <span>Quem sou eu</span>
+        </div>
+        <h2>Dr. João <em>Otávio</em></h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <p>
+        Sou João Otávio, fisioterapeuta especializado em reabilitação traumato-ortopédica e esportiva. 
+        Meu trabalho nasce do compromisso de unir ciência, técnica e humanidade — porque tratar bem 
+        é também escutar com atenção.
+      </p>
+      <p>
+        Acredito que cada corpo tem sua história. Por isso, ofereço um atendimento individualizado, 
+        transparente e eficaz — tornando você parte ativa da sua própria recuperação, com clareza 
+        em cada etapa do processo.
+      </p>
+
+      <div class="sobre-atributos">
+        <div class="atributo"><div class="atributo-dot"></div><span>Escuta ativa e cuidado real</span></div>
+        <div class="atributo"><div class="atributo-dot"></div><span>Base em evidências científicas</span></div>
+        <div class="atributo"><div class="atributo-dot"></div><span>Atendimento individualizado</span></div>
+        <div class="atributo"><div class="atributo-dot"></div><span>Postura ética e transparente</span></div>
+      </div>
+
+      <div class="formacoes">
+        <div class="formacao-row">
+          <div class="formacao-icon">🎓</div>
+          <div>
+            <div class="formacao-titulo">Graduação em Fisioterapia</div>
+            <div class="formacao-inst">Unifametro — Fortaleza, CE</div>
+          </div>
+        </div>
+        <div class="formacao-row">
+          <div class="formacao-icon">🏅</div>
+          <div>
+            <div class="formacao-titulo">Especialização em Ortopedia e Esportes</div>
+            <div class="formacao-inst">[Instituição] — [Ano]</div>
+          </div>
+        </div>
+        <div class="formacao-row">
+          <div class="formacao-icon">📋</div>
+          <div>
+            <div class="formacao-titulo">CREFITO — [número do seu registro]</div>
+            <div class="formacao-inst">Conselho Regional de Fisioterapia e Terapia Ocupacional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVIÇOS ── -->
+<section id="servicos">
+  <div class="servicos-intro">
+    <div class="section-header" style="margin-bottom:0">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>O que eu trato</span>
+      </div>
+      <h2>Serviços &amp;<br><em>Abordagens</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="servicos-intro-text">
+      <p>Do alívio imediato da dor à performance máxima — cada caso recebe um plano de tratamento exclusivo, pensado sob medida para a sua realidade.</p>
+    </div>
+  </div>
+
+  <div class="servicos-grid">
+    <div class="servico-card">
+      <div class="servico-num">01</div>
+      <div class="servico-title">Alívio de Dor Aguda</div>
+      <p class="servico-desc">
+        Dor aguda, travamento ou limitação de movimento? O tratamento começa 
+        na primeira sessão — com técnicas que geram resultado imediato e concreto.
+      </p>
+      <div class="servico-tecnicas">
+        <span class="tag-tecnica">Terapia Manual</span>
+        <span class="tag-tecnica">Eletroterapia</span>
+        <span class="tag-tecnica">RPG</span>
+      </div>
+    </div>
+
+    <div class="servico-card">
+      <div class="servico-num">02</div>
+      <div class="servico-title">Reabilitação</div>
+      <p class="servico-desc">
+        Pós-cirúrgico, lesão articular ou muscular? Programa progressivo e seguro 
+        para recuperar função e autonomia no menor tempo possível.
+      </p>
+      <div class="servico-tecnicas">
+        <span class="tag-tecnica">Exercício Terapêutico</span>
+        <span class="tag-tecnica">Cinesioterapia</span>
+        <span class="tag-tecnica">Pilates Clínico</span>
+      </div>
+    </div>
+
+    <div class="servico-card">
+      <div class="servico-num">03</div>
+      <div class="servico-title">Performance Esportiva</div>
+      <p class="servico-desc">
+        Para quem quer ir além da recuperação. Prevenção de lesões, 
+        fortalecimento e otimização do movimento para o seu nível máximo.
+      </p>
+      <div class="servico-tecnicas">
+        <span class="tag-tecnica">Avaliação Funcional</span>
+        <span class="tag-tecnica">Treinamento Neuromuscular</span>
+        <span class="tag-tecnica">Retorno ao Esporte</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEPOIMENTOS ── -->
+<section id="depoimentos">
+  <div class="dep-top">
+    <div class="section-header" style="margin-bottom:0">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>Resultados reais</span>
+      </div>
+      <h2>O que dizem meus<br><em>pacientes</em></h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="dep-google-badge">
+      <div class="g-letter">G</div>
+      <div>
+        <div class="g-rating-num">4.9</div>
+        <div class="g-stars-row">★★★★★</div>
+        <div class="g-label">GOOGLE REVIEWS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-quote-mark">"</div>
+      <p class="dep-text">
+        Após meses com dor no joelho sem resultado em outros lugares, o Dr. João identificou 
+        o problema na segunda sessão. Em 4 semanas voltei a correr. Atendimento impecável — 
+        explica tudo com clareza e é presente em cada etapa.
+      </p>
+      <div class="dep-author">
+        <div class="dep-avatar">M</div>
+        <div>
+          <div class="dep-name">Marcos Andrade</div>
+          <div class="dep-stars-small">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dep-card">
+      <div class="dep-quote-mark">"</div>
+      <p class="dep-text">
+        Fiz cirurgia no ombro e achei que não ia voltar a treinar normalmente. 
+        A reabilitação com o Dr. Otávio foi além do que esperava. 
+        Profissional de excelência — técnico, humano e muito dedicado.
+      </p>
+      <div class="dep-author">
+        <div class="dep-avatar">A</div>
+        <div>
+          <div class="dep-name">Ana Carvalho</div>
+          <div class="dep-stars-small">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dep-card">
+      <div class="dep-quote-mark">"</div>
+      <p class="dep-text">
+        Sofria com dor lombar crônica há anos. O tratamento foi direto ao ponto — 
+        sem enrolação, com explicação real do que estava acontecendo. 
+        Em poucas semanas minha qualidade de vida mudou completamente.
+      </p>
+      <div class="dep-author">
+        <div class="dep-avatar">R</div>
+        <div>
+          <div class="dep-name">Ricardo Moura</div>
+          <div class="dep-stars-small">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:2rem;font-size:0.78rem;color:rgba(255,255,255,0.35);text-align:center;">
+    ⚠️ Substitua pelos seus depoimentos reais do Google para máxima credibilidade.
+  </p>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <div>
+    <h2>Pronto para dar o<br>primeiro passo?</h2>
+    <p>Vagas limitadas por semana. Agende sua avaliação e descubra a causa real da sua dor.</p>
+  </div>
+  <a href="https://wa.me/5585984051321" target="_blank" class="btn-cta-white">
+    Agendar pelo WhatsApp
+  </a>
+</div>
+
+<!-- ── CONTATO ── -->
+<section id="contato">
+  <div class="contato-grid">
+    <div class="contato-info">
+      <div class="section-header">
+        <div class="eyebrow">
+          <div class="eyebrow-line"></div>
+          <span>Entre em contato</span>
+        </div>
+        <h2>Vamos conversar<br>sobre <em>seu caso</em></h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <p>
+        Atendo de forma presencial. Entre em contato pelo WhatsApp ou preencha o 
+        formulário — retorno em até 2h úteis.
+      </p>
+
+      <div class="contato-dados">
+        <div class="dado-row">
+          <div class="dado-icon">📱</div>
+          <div>
+            <div class="dado-label">WhatsApp</div>
+            <div class="dado-value">(85) 98405.1321</div>
+          </div>
+        </div>
+        <div class="dado-row">
+          <div class="dado-icon">✉️</div>
+          <div>
+            <div class="dado-label">E-mail</div>
+            <div class="dado-value">joaootaviofisio@gmail.com</div>
+          </div>
+        </div>
+        <div class="dado-row">
+          <div class="dado-icon">📸</div>
+          <div>
+            <div class="dado-label">Instagram</div>
+            <div class="dado-value">@otavio_fisio</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="locais">
+        <div class="locais-title">📍 Locais de Atendimento</div>
+        <div class="local-item">
+          <div class="local-nome">Clínica 1 — [Nome do local]</div>
+          <div class="local-end">Rua [Endereço completo] — Bairro, Fortaleza - CE</div>
+          <div class="local-hrs">Seg, Qua e Sex · 8h às 18h</div>
+        </div>
+        <div class="local-item">
+          <div class="local-nome">Clínica 2 — [Nome do local]</div>
+          <div class="local-end">Rua [Endereço completo] — Bairro, Fortaleza - CE</div>
+          <div class="local-hrs">Ter e Qui · 8h às 18h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contato-form-wrap">
+      <div class="form-title">Agendar Avaliação</div>
+      <p class="form-sub">Preencha abaixo e entro em contato para confirmar seu horário.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Seu nome completo">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="(85) 9XXXX-XXXX">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Principal queixa</label>
+        <select>
+          <option value="">Selecione...</option>
+          <option>Dor lombar / coluna</option>
+          <option>Dor no joelho</option>
+          <option>Dor no ombro</option>
+          <option>Lesão esportiva</option>
+          <option>Pós-cirúrgico</option>
+          <option>Cervicalgia / pescoço</option>
+          <option>Tendinite</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Local de preferência</label>
+        <select>
+          <option value="">Selecione...</option>
+          <option>Clínica 1</option>
+          <option>Clínica 2</option>
+          <option>Sem preferência</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Mensagem (opcional)</label>
+        <textarea placeholder="Descreva brevemente sua situação..."></textarea>
+      </div>
+
+      <button class="form-submit" onclick="window.open('https://wa.me/5585984051321','_blank')">
+        Enviar Pedido de Agendamento →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-name">DR. JOÃO OTÁVIO</div>
+    <div class="footer-sub">Fisioterapia Especializada · CREFITO [número]</div>
+  </div>
+  <div class="footer-links">
+    <a href="#home">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </div>
+  <p>© 2025 Dr. João Otávio · Todos os direitos reservados</p>
+</footer>
+
+<script>
+  // Navbar shadow on scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+</script>
+
+</body>
+</html>
